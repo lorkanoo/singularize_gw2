@@ -83,6 +83,7 @@ const ENDINGS: &[(&'static str, &'static str)] = &[
     // ("fe", "ves"),
     ("lf", "lves"),
     //
+    ("'s", "'s"),
     ("s", "ses"),
     //
     ("rse", "rses"),
