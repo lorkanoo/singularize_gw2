@@ -1,3 +1,5 @@
+use regex::{Match, Regex};
+
 const UNCOUNTABLE: &[&'static str] = &[
     "equipment",
     "information",
@@ -105,6 +107,54 @@ fn concat(a: &str, b: &str) -> String {
     out.push_str(a);
     out.push_str(b);
     out
+}
+
+fn singularize_item_name(item_tag: &String) -> String {
+    let re_remove_item_count = Regex::new(r"^\d+ ").unwrap();
+    let mut result = item_tag.clone();
+    let matched_item_quantity: Vec<Match> = re_remove_item_count.find_iter(&item_tag).collect();
+    let has_quantity = matched_item_quantity.len() > 0;
+    for i in matched_item_quantity {
+        result = result.replace(i.as_str(), "");
+    }
+    if !has_quantity {
+        result
+    } else {
+        let mut words = result.split(" ").map(|s| s.to_string()).collect::<Vec<String>>();
+        let mut singularized = false;
+        if let Some(word) = words.first_mut() {
+            singularize_word(&mut singularized, word);
+        }
+        if singularized {
+            return words.join(" ")
+        }
+
+        if let Some(word) = words.last_mut() {
+            singularize_word(&mut singularized, word);
+        }
+
+        if singularized {
+            return words.join(" ")
+        }
+
+        if words.len() > 2 {
+            for i in 1..words.len() - 2 {
+                if let Some(word) = words.get_mut(i) {
+                    singularize_word(&mut singularized, word);
+                }
+            }
+        }
+
+        words.join(" ")
+    }
+}
+
+fn singularize_word(singularized: &mut bool, word: &mut String) {
+    let word_singularized = singularize(word);
+    if word_singularized != *word {
+        *word = word_singularized.to_string();
+        *singularized = true;
+    }
 }
 
 /// Convert a word from plural to singular

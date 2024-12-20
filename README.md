@@ -1,5 +1,3 @@
 # singularize
-
-This is a very simple repository to approximately convert English words between
-singular and plural.  It is designed to have a very simple API, and to have no
-dependencies.
+Singularize package modified to correctly singularize GW2 item names.
+Based on https://github.com/droundy/singularize

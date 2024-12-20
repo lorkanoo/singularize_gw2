@@ -45,6 +45,7 @@ fn known() {
     two_way("vertex", "vertices");
     two_way("matrix", "matrices");
     two_way("index", "indices");
+    two_way("purse", "purses");
 
     for pair in PAIRS.iter() {
         two_way(pair.0, pair.1);
@@ -182,13 +183,11 @@ const PAIRS: &[(&'static str, &'static str)] = &[
     ("party", "parties"),
     ("agency", "agencies"),
     ("city", "cities"),
-    //
-    // ("domino", "dominoes"),
-    //
     ("wife", "wives"),
     ("half", "halves"),
     ("life", "lives"),
     ("thief", "thieves"),
     ("knife", "knives"),
     ("motive", "motives"),
+    ("purse", "purses"),
 ];
