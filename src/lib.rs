@@ -109,7 +109,7 @@ fn concat(a: &str, b: &str) -> String {
     out
 }
 
-fn singularize_item_name(item_tag: &String) -> String {
+pub fn singularize_item_name(item_tag: &String) -> String {
     let re_remove_item_count = Regex::new(r"^\d+ ").unwrap();
     let mut result = item_tag.clone();
     let matched_item_quantity: Vec<Match> = re_remove_item_count.find_iter(&item_tag).collect();
